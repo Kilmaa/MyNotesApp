@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">My Notes App</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="btnAdd">ADD</string>
+    <string name="btnShow">SHOW LIST</string>
+    <string name="title_hint">write title here</string>
+    <string name="description_hint">write description here</string>
+    <string name="pin">Pin</string>
+    <string name="notPin">Not Pin</string>
+    <string name="tgBtnOff">VIEW ALL PINNED NOTES</string>
+    <string name="tgBtnOn">CANCEL FILTER</string>
+    <string name="noteID">Note ID</string>
+    <string name="rowTitle">Note Title</string>
+    <string name="rowDescription">Description</string>
 </resources>
