@@ -56,17 +56,18 @@ public class Note implements Serializable {
         this.pin = pin;
     }
 
-    /*
-    @NonNull
+
     @Override
     public String toString() {
-        String starsString = "";
-        for(int i = 0; i < stars; i++){
-            starsString += "*";
+        String pinString = "";
+        if(pin == "true") {
+            pinString="*";
+        } else {
+            pinString="";
         }
-        return name + "\n" + description + " - " + area + "\n" + starsString;
+        return pinString;
 
     }
-    */
+
 }
 

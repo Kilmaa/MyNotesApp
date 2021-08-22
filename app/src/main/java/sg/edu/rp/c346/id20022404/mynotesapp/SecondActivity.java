@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     ToggleButton tgBtn;
+    TextView tvPinTitle;
     ListView lv;
     ArrayList<Note> noteList;
     CustomAdapter adapter;
@@ -25,7 +28,10 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         tgBtn = findViewById(R.id.tgBtn);
+        tvPinTitle = findViewById(R.id.tvPinTitle);
         lv  = findViewById(R.id.lv);
+
+        tvPinTitle.setText("\nALL THE NOTES:");
 
         DBHelper dbh = new DBHelper(this);
         noteList = dbh.getAllNotes();
@@ -46,12 +52,16 @@ public class SecondActivity extends AppCompatActivity {
         tgBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    // The toggle is enabled
+                    tvPinTitle.setText("\nIMPORTANT NOTES:");
                     DBHelper dbh = new DBHelper(SecondActivity.this);
                     noteList.clear();
-                    noteList.addAll(dbh.getNotesByPin("yes"));
+                    noteList.addAll(dbh.getNotesByPin("*"));
                     adapter.notifyDataSetChanged();
 
                 } else {
+                    // The toggle is disabled
+                    tvPinTitle.setText("\nALL THE NOTES:");
                     DBHelper dbh = new DBHelper(SecondActivity.this);
                     noteList.clear();
                     noteList.addAll(dbh.getAllNotes());

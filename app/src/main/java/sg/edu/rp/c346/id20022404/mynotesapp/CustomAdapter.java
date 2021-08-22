@@ -41,12 +41,7 @@ public class CustomAdapter extends ArrayAdapter {
         // Set values to the TextView to display the corresponding information
         tvTitle.setText(currentNote.getTitle());
         tvDescription.setText(currentNote.getDescription());
-
-        if (currentNote.getPin() == "yes") {
-            tvPin.setText("*");
-        } else if (currentNote.getPin() == "no") {
-            tvPin.setText("");
-        }
+        tvPin.setText(currentNote.getPin());
 
         return rowView;
     }

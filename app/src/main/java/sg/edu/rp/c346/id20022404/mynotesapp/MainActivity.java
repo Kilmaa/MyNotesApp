@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etTitle, etDescription;
     Button btnAdd, btnShow;
     RadioGroup rg;
+    RadioButton rbNotPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
         btnShow = findViewById(R.id.btnShow);
         rg = findViewById(R.id.rg);
+        rbNotPin = findViewById(R.id.rbNotPin);
+
+        rbNotPin.setChecked(true);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,23 +43,17 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String pin = "no";
-
-                if (rg.getCheckedRadioButtonId() == R.id.rbPin) {
-                    pin = "yes";
-                } else if (rg.getCheckedRadioButtonId() == R.id.rbNotPin) {
-                    pin = "no";
-                }
+                String checkPin = checkPin();
 
                 DBHelper dbh = new DBHelper(MainActivity.this);
 
-                dbh.insertNote(title, description, pin);
+                dbh.insertNote(title, description, checkPin);
                 dbh.close();
                 Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_LONG).show();
 
                 etTitle.setText("");
                 etDescription.setText("");
-
+                rbNotPin.setChecked(true);
             }
         });
 
@@ -65,5 +64,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+    }
+
+    private String checkPin() {
+        String check = "";
+        switch (rg.getCheckedRadioButtonId()) {
+            case R.id.rbPin:
+                check = "*";
+                break;
+            case R.id.rbNotPin:
+                check = "";
+                break;
+        }
+        return check;
     }
 }
