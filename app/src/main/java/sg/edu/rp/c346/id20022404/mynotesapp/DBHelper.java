@@ -116,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int updateNote(Note data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, data.getName());
+        values.put(COLUMN_TITLE, data.getTitle());
         values.put(COLUMN_DESCRIPTION, data.getDescription());
         values.put(COLUMN_PIN, data.getPin());
         String condition = COLUMN_ID + "= ?";
